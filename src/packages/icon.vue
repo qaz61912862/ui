@@ -4,6 +4,6 @@
 
 <script>
 export default {
-    name: 'h-icon' // 定义组件名
+    name: 'h-icon' // 定义组件名1
 }
 </script>
