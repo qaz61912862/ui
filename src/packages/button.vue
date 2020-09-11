@@ -1,16 +1,37 @@
 <template>
-  <button @click="handleClick">button</button>
+  <button :disabled="props.disabled" :class="`el-button el-button--${props.size} el-button--${props.type} ${round ? 'is-round': null} ${disabled ? 'is-disabled': null} `" @click="handleClick">button</button>
 </template>
 
 <script>
+import { reactive } from 'vue'
 export default {
   name: 'h-button', // 定义组件名
-  setup(props, { emit }) {
+  props: {
+    type: {
+      type: String,
+      default: 'default'
+    },
+    size: {
+      type: String,
+      default: ''
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    round: {
+      type: Boolean,
+      default: false
+    }
+  },
+  setup(props, ctx) {
+    props = reactive(props)
     const handleClick = () => {
-      emit('h-click', 123)
+      ctx.emit('h-click')
     }
     return {
-      handleClick
+      handleClick,
+      props
     }
   }
 }
