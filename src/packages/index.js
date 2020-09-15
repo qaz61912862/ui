@@ -1,11 +1,15 @@
 import Button from './button.vue'
 import Icon from './icon.vue'
 import Radio from './radio.vue'
+import Checkbox from './checkbox.vue'
+import CheckboxGroup from './checkbox-group.vue'
 
 const components = [
   Button,
   Icon,
-  Radio
+  Radio,
+  Checkbox,
+  CheckboxGroup
 ]
 const install = Vue => {
   components.forEach(each => {
