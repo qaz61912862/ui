@@ -24,10 +24,11 @@ export default {
       default: false
     }
   },
+  emits: ['click'],
   setup(props, ctx) {
     props = reactive(props)
     const handleClick = () => {
-      ctx.emit('h-click')
+      ctx.emit('click')
     }
     return {
       handleClick,

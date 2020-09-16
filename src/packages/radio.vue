@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { computed, nextTick } from 'vue'
+import { computed, nextTick, inject, ref } from 'vue'
 export default {
   name: 'h-radio',
   props: {
@@ -46,6 +46,10 @@ export default {
   },
   // emits: ['update:modelValue', 'change'],
   setup(props, ctx) {
+    const _radioGroup = ref(inject('RadioGroup', {}))
+    const isGroup = computed(() => {
+      return _radioGroup.value && _radioGroup.value.name === 'RadioGroup'
+    })
     const handleChange = (val) => {
       nextTick(() => {
         ctx.emit('change', val)
@@ -53,7 +57,7 @@ export default {
     }
     const model = computed({
       get() {
-        return props.modelValue
+        return isGroup.value ? _radioGroup.value.model : props.modelValue
       },
       set(val) {
         ctx.emit('update:modelValue', val)
@@ -67,7 +71,6 @@ export default {
       handleChange,
       isDisabled
     }
-    // console.log(props.modelValue)
   },
 }
 </script>

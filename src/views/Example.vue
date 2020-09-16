@@ -5,12 +5,24 @@
     count: {{count}}
     name: {{name}}
     countName: {{countName}}
-    <h-button type="success" size="medium" @h-click="test" round>我是按钮</h-button>
+    <h-button type="success" size="medium" @click="test" round>我是按钮</h-button>
     <div style="margin-top: 10px">
       <h-radio @change="getVal" label="1" v-model="testValue" name="备选项1" />
       <h-radio @change="getVal" label="2" v-model="testValue" name="备选项2" />
       <div>
         value: {{testValue}}
+      </div> 
+    </div>
+    <div style="margin-top: 10px">
+      <h-radio-group
+        v-model="radio"
+      >
+        <h-radio :label="3">备选项3</h-radio>
+        <h-radio :label="6">备选项6</h-radio>
+        <h-radio :label="9">备选项9</h-radio>
+      </h-radio-group>
+      <div>
+        value: {{radio}}
       </div> 
     </div>
     <div style="margin-top: 10px">
@@ -37,10 +49,11 @@
 </template>
 
 <script>
-import { ref, watchEffect, watch, computed } from 'vue'
+import { ref, watchEffect, computed } from 'vue'
 import { useRoute, useRouter, onBeforeRouteUpdate, onBeforeRouteLeave } from 'vue-router'
 export default {
   setup() {
+    const radio = ref(9)
     const count = ref(0)
     const testGroup = ref(['1', '3'])
     const countName = ref(100)
@@ -86,9 +99,9 @@ export default {
     const getVal = (val) => {
       console.log('theVal', val)
     }
-    const unwatch = watch(count, (newValue, oldValue) => {
-      console.log('n&o', newValue, oldValue)
-    })
+    // const unwatch = watch(count, (newValue, oldValue) => {
+    //   console.log('n&o', newValue, oldValue)
+    // })
     var timer = setInterval(() => {
       count.value += 1
       if (count.value >= 5) {
@@ -96,7 +109,7 @@ export default {
       }
       if (count.value >= 3) {
         unwatchEffect()
-        unwatch()
+        // unwatch()
       }
     }, 2000)
     const unwatchEffect = watchEffect(() => {
@@ -111,7 +124,8 @@ export default {
       test,
       testValue,
       getVal,
-      count
+      count,
+      radio
     }
   }
 }
