@@ -21,7 +21,12 @@
       </div>
     </div>
     <div style="margin-top: 10px">
-      <h-checkbox-group v-model="testGroup">
+      {{testGroup}}
+      <h-checkbox-group 
+        v-model="testGroup" 
+        @change="getGroupVal"
+        :min="1"
+      >
         <h-checkbox label="1" name="备选项1"></h-checkbox>
         <h-checkbox label="2" name="备选项2"></h-checkbox>
         <h-checkbox label="3" name="备选项3"></h-checkbox>
@@ -37,7 +42,7 @@ import { useRoute, useRouter, onBeforeRouteUpdate, onBeforeRouteLeave } from 'vu
 export default {
   setup() {
     const count = ref(0)
-    const testGroup = ref(['1', '2'])
+    const testGroup = ref(['1', '3'])
     const countName = ref(100)
     const route = useRoute()
     const router = useRouter()
@@ -70,13 +75,16 @@ export default {
     })
     const testValue = ref('1')
     const testCheckbox = ref(true)
+    const getGroupVal = val => {
+      console.log('getGroupVal', val)
+    }
     const test = () => {
       console.log(route)
       router.push('/example?name=123')
       name.value += 1
     }
-    const getVal = () => {
-      // console.log(val)
+    const getVal = (val) => {
+      console.log('theVal', val)
     }
     const unwatch = watch(count, (newValue, oldValue) => {
       console.log('n&o', newValue, oldValue)
@@ -95,6 +103,7 @@ export default {
       // console.log(count.value)
     })
     return {
+      getGroupVal,
       testGroup,
       testCheckbox,
       countName,

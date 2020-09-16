@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { computed, nextTick, inject } from 'vue'
+import { computed, nextTick, inject, ref } from 'vue'
 export default {
   name: 'h-checkbox',
   props: {
@@ -44,40 +44,44 @@ export default {
       default: false
     }
   },
-  // emits: ['update:modelValue', 'change'],
-  setup(props, ctx) {
-    const handleChange = (val) => {
+  emits: ['update:modelValue', 'change'],
+  setup(props, { emit }) {
+    const _checkboxGroup = ref(inject('CheckboxGroup', {}))
+    // const max = _checkboxGroup.value.max
+    // const min = _checkboxGroup.value.min
+    const handleChange = (e) => {
+      const target = e.target
+      const val = target.checked
       nextTick(() => {
-        ctx.emit('change', val)
+        emit('change', val)
       })
+      
     }
-    const _checkboxGroup = inject('CheckboxGroup', {})
-    const store = computed(() => _checkboxGroup ? _checkboxGroup.modelValue.value : props.modelValue)
-    console.log('store', store)
+    
+    
+    // const store = computed(() => _checkboxGroup ? _checkboxGroup.modelValue.value : props.modelValue)
     const isGroup = computed(() => {
-      return _checkboxGroup && _checkboxGroup.name === 'CheckboxGroup'
+      return _checkboxGroup.value && _checkboxGroup.value.name === 'CheckboxGroup'
     })
     const model = computed({
       get() {
-        return isGroup.value ? _checkboxGroup.model : props.modelValue
+        return isGroup.value ? _checkboxGroup.value.model : props.modelValue
       },
       set(val) {
-        ctx.emit('update:modelValue', val)
+        // console.log('go')
+        emit('update:modelValue', val)
       }
     })
-
-    console.log(_checkboxGroup)
+    // console.log(model)
     const isDisabled = computed(() => {
       return props.disabled
     })
-    
     
     return {
       model,
       handleChange,
       isDisabled
     }
-    // console.log(props.modelValue)
   },
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div @change="getVal">
     <slot></slot>
   </div>
 </template>
@@ -11,10 +11,18 @@ export default {
     modelValue: {
       type: Array,
       default: () => ([])
+    },
+    min: {
+      type: Number,
+      default: undefined
+    },
+    max: {
+      type: Number,
+      default: undefined
     }
   },
   emits: ['update:modelValue', 'change'],
-  setup(props, ctx) {
+  setup(props, { emit }) {
     const model = computed({
       get() {
         return props.modelValue
@@ -24,16 +32,30 @@ export default {
       }
     })
     const changeEvent = value => {
-      ctx.emit('update:modelValue', value)
+      emit('update:modelValue', value)
       nextTick(() => {
-        ctx.emit('change', value)
+        // emit('change', value)
       })
+    }
+    const getVal = ({target: {checked, defaultValue}}) => {
+      if (checked) {
+        model.value.push(defaultValue)
+      } else {
+        const index = model.value.findIndex(item => item === defaultValue)
+        model.value.splice(index, 1)
+      }
+      emit('change', Array.from(model.value))
     }
     provide('CheckboxGroup', {
       name: 'CheckboxGroup',
       model,
-      changeEvent
+      // changeEvent,
+      min: props.min,
+      max: props.max
     })
+    return {
+      getVal
+    }
   }
 }
 </script>
