@@ -14,7 +14,14 @@ const components = [
   CheckboxGroup
 ]
 const install = Vue => {
+  // Vue.component(Button.name,Button)
+  // Vue.component(Icon.name,Icon)
+  // Vue.component(Radio.name,Radio)
+  // Vue.component(RadioGroup.name,RadioGroup)
+  // Vue.component(Checkbox.name,Checkbox)
+  // Vue.component(CheckboxGroup.name,CheckboxGroup)
   components.forEach(each => {
+    console.log(each.name, each)
     Vue.component(each.name, each) 
   })
   // 我们可以把名字在组件文件里用name定义好,这样就取的是组件文件的名字

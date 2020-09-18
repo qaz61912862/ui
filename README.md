@@ -1,9 +1,9 @@
 # hanson-ui
 
 ## 安装
-npm install hanson-ui
+npm install hansonggorui
 
 ### 使用
-import hansonUI from 'hanson-ui'
+import install from 'hansonggorui'
 <!-- import 'poly-ui/dist/poly-ui.css' -->
-vue.use(hansonUI)
+use(install)
