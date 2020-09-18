@@ -1,9 +1,9 @@
 # hanson-ui
 
 ## 安装
-npm install hansonggorui
+npm install hansonggoruia
 
 ### 使用
-import install from 'hansonggorui'
-<!-- import 'poly-ui/dist/poly-ui.css' -->
+import install from 'hansonggoruia'
+import 'hansonggoruia/dist/index.css'
 use(install)
