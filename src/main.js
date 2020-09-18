@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import './styles/index.css'
 import router from './router'
-import install from 'hansonggorui'
+import install from './packages/index.js'
 import store from './store'
 const app = createApp(App)
 // install(app)
