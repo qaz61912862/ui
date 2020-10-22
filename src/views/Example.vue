@@ -45,6 +45,8 @@
         <h-checkbox label="4" name="备选项4"></h-checkbox>
       </h-checkbox-group>
     </div>
+    <h-input v-model="testInput" placeholder="请输入"/>
+    {{testInput}}
   </div>
 </template>
 
@@ -53,6 +55,7 @@ import { ref, watchEffect, computed } from 'vue'
 import { useRoute, useRouter, onBeforeRouteUpdate, onBeforeRouteLeave } from 'vue-router'
 export default {
   setup() {
+    const testInput = ref('123')
     const radio = ref(9)
     const count = ref(0)
     const testGroup = ref(['1', '3'])
@@ -125,7 +128,8 @@ export default {
       testValue,
       getVal,
       count,
-      radio
+      radio,
+      testInput
     }
   }
 }

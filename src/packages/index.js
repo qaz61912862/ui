@@ -1,5 +1,6 @@
 import Button from './button.vue'
 import Icon from './icon.vue'
+import Input from './input.vue'
 import Radio from './radio.vue'
 import RadioGroup from './radio-group.vue'
 import Checkbox from './checkbox.vue'
@@ -8,6 +9,7 @@ import CheckboxGroup from './checkbox-group.vue'
 const components = [
   Button,
   Icon,
+  Input,
   Radio,
   RadioGroup,
   Checkbox,
