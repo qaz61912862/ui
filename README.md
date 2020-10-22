@@ -4,11 +4,11 @@
 npm install hansonggoruia
 
 ### vue3项目使用
-import install from 'hansonggoruia'
+import hansonggoruia from 'hansonggoruia'
 
 import 'hansonggoruia/dist/index.css'
 
-createApp(App).use(install)
+createApp(App).use(hansonggoruia)
 
 ts项目:
 
