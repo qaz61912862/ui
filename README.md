@@ -3,7 +3,15 @@
 ## 安装
 npm install hansonggoruia
 
-### 使用
-import install from 'hansonggoruia'
+### vue3项目使用
+import hansonggoruia from 'hansonggoruia'
+
 import 'hansonggoruia/dist/index.css'
-use(install)
+
+createApp(App).use(hansonggoruia)
+
+ts项目:
+
+shims-vue.d.ts中增加:
+
+declare module 'hansonggoruia'
