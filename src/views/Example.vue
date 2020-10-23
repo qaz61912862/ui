@@ -45,17 +45,62 @@
         <h-checkbox label="4" name="备选项4"></h-checkbox>
       </h-checkbox-group>
     </div>
-    <h-input v-model="testInput" placeholder="请输入"/>
-    {{testInput}}
-    <h-form></h-form>
+    <!-- <h-input v-model="testInput" placeholder="请输入"/> -->
+    <!-- {{testInput}} -->
+    <br /><br />
+    <h-form :rules="rules" @form-submit="formSubmit">
+      <h-input prop="mobile" v-model="params.mobile" placeholder="请输入手机号"/>
+      <h-input prop="email" v-model="params.email" placeholder="请输入邮箱"/>
+      性别:
+      <h-radio-group
+        v-model="params.sex"
+        prop="sex"
+      >
+        <h-radio :label="1">男</h-radio>
+        <h-radio :label="2">女</h-radio>
+      </h-radio-group>
+    </h-form>
   </div>
 </template>
 
 <script>
-import { ref, watchEffect, computed } from 'vue'
+import { ref, watchEffect, computed, reactive } from 'vue'
 import { useRoute, useRouter, onBeforeRouteUpdate, onBeforeRouteLeave } from 'vue-router'
 export default {
   setup() {
+    const rules = ref({
+      mobile: [
+        {
+          required: true,
+          trigger: 'blur',
+          message: '请输入手机号'
+        },
+        {
+          validate: /^1(3[0-9]|5[0-3,5-9]|7[1-3,5-8]|8[0-9])\d{8}$/,
+          trigger: 'blur',
+          message: '请输入正确的手机号'
+        }
+      ],
+      email: [
+        {
+          required: true,
+          trigger: 'blur',
+          message: '请输入邮箱'
+        },
+        {
+          validate: /^[A-Za-zd0-9]+([-_.][A-Za-zd]+)*@([A-Za-zd]+[-.])+[A-Za-zd]{2,5}$/,
+          trigger: 'blur',
+          message: '请输入正确的邮箱'
+        }
+      ],
+      sex: [
+        {
+          required: true,
+          trigger: 'change',
+          message: '请选择性别'
+        },
+      ]
+    })
     const testInput = ref('123')
     const radio = ref(9)
     const count = ref(0)
@@ -119,6 +164,16 @@ export default {
     const unwatchEffect = watchEffect(() => {
       // console.log(count.value)
     })
+    const params = reactive({
+      mobile: '',
+      email: '',
+      sex: ''
+    })
+    const formSubmit = (valid) => {
+      if (valid) {
+        console.log(params)
+      }
+    }
     return {
       getGroupVal,
       testGroup,
@@ -130,7 +185,10 @@ export default {
       getVal,
       count,
       radio,
-      testInput
+      testInput,
+      params,
+      rules,
+      formSubmit
     }
   }
 }
