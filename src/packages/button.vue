@@ -1,5 +1,7 @@
 <template>
-  <button :disabled="props.disabled" :class="`el-button el-button--${props.size} el-button--${props.type} ${round ? 'is-round': null} ${disabled ? 'is-disabled': null} `" @click="handleClick">button</button>
+  <button :disabled="props.disabled" :class="`el-button el-button--${props.size} el-button--${props.type} ${round ? 'is-round': null} ${disabled ? 'is-disabled': null} `" @click="handleClick">
+    <slot>button</slot>
+  </button>
 </template>
 
 <script>

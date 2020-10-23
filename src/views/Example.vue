@@ -47,6 +47,7 @@
     </div>
     <h-input v-model="testInput" placeholder="请输入"/>
     {{testInput}}
+    <h-form></h-form>
   </div>
 </template>
 

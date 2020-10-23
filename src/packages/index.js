@@ -5,6 +5,7 @@ import Radio from './radio.vue'
 import RadioGroup from './radio-group.vue'
 import Checkbox from './checkbox.vue'
 import CheckboxGroup from './checkbox-group.vue'
+import Form from './form.vue'
 
 const components = [
   Button,
@@ -13,7 +14,8 @@ const components = [
   Radio,
   RadioGroup,
   Checkbox,
-  CheckboxGroup
+  CheckboxGroup,
+  Form
 ]
 const install = Vue => {
   // Vue.component(Button.name,Button)
