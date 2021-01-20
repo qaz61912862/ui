@@ -54,6 +54,7 @@ export default {
       const val = target.checked
       nextTick(() => {
         emit('change', val)
+        console.log(123)
       })
       
     }
