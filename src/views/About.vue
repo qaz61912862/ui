@@ -1,5 +1,38 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    {{id}}
+    <query-selector
+      placeholder="请选择"
+      @change="change"
+      v-model="id"
+      :method="getList"
+      needInitSearch
+      :config="{
+        dataKey: 'data',
+        labelKey: 'label',
+        valueKey: 'value'
+      }"
+      filterable
+      remote
+    />
   </div>
 </template>
+
+<script>
+import { defineComponent, ref } from 'vue'
+import { getList } from '../http';
+
+export default defineComponent({
+  setup() {
+    const id = ref('d');
+    const change = (val, row) => {
+      console.log(val, row)
+    }
+    return {
+      id,
+      getList,
+      change,
+    }
+  },
+});
+</script>

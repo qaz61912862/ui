@@ -1,5 +1,6 @@
 <template>
   <div class="example">
+    <query-selector />
     <!-- count: {{count}} -->
     testValue: {{testValue}}
     count: {{count}}
