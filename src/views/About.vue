@@ -8,9 +8,9 @@
       :method="getList"
       needInitSearch
       :config="{
-        dataKey: 'data',
-        labelKey: 'label',
-        valueKey: 'value'
+        dataKey: 'data.users',
+        labelKey: 'userName',
+        valueKey: 'userId'
       }"
       filterable
       remote
@@ -24,7 +24,7 @@ import { getList } from '../http';
 
 export default defineComponent({
   setup() {
-    const id = ref('d');
+    const id = ref('239');
     const change = (val, row) => {
       console.log(val, row)
     }

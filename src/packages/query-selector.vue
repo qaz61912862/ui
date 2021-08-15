@@ -19,6 +19,7 @@
 
 <script>
 import { defineComponent, ref, computed } from 'vue'
+import { get } from 'lodash-es'
 function debounce(fn, delay = 1000) {
   var timer
   return function() {
@@ -37,7 +38,10 @@ export default defineComponent({
     // 额外参数
     queryParams: {
       type: Object,
-      default: () => ({})
+    },
+    queryKey: {
+      type: String,
+      default: 'keywordQuery'
     },
     // 是否初始化查询数据
     needInitSearch: {
@@ -68,10 +72,17 @@ export default defineComponent({
     const loading = ref(false);
     const options = ref([]);
     const getData = async (query) => {
+      if(!query) query = '';
       loading.value = true;
-      const res = await props.method(query);
+      const params = {
+        ...props.queryParams,
+      }
+      params[props.queryKey] = query;
+      const res = await props.method(props.queryParams ? params: query);
+      // console.log('res', res, props.config.dataKey, res['data.users'], res.data.users);
       loading.value = false;
-      options.value = res[props.config.dataKey]
+      // options.value = res[props.config.dataKey]
+      options.value = get(res, props.config.dataKey)
     }
     if (props.needInitSearch) getData();
     const remoteMethod = async (query) => {
